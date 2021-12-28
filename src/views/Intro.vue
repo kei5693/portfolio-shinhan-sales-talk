@@ -1,0 +1,192 @@
+<template>
+    <div id="introCont" :class="{ 'step1': step1, 'step2': step2 }">
+      <div class="left">
+        <div></div>
+        <button type="button" @click="goStep2()">닫기</button>
+      </div>
+      <div class="right"><a href="#" target="_blank">페이지 이동</a></div>
+    </div>
+</template>
+<script>
+export default {
+  data(){
+    return {
+      step1: false,
+      step2: false,
+    }
+  },
+  methods: {
+    goStep1(){
+      setTimeout(() => {
+        this.step1 = !this.step1;
+      }, 500);
+    },
+    goStep2(){
+      this.step2 = !this.step2;
+    }
+  },
+  mounted(){
+    this.goStep1()
+  },
+}
+</script>
+<style>
+html, body, #app {height:100%;}
+body {overflow:hidden;background: rgba(0,0,0,0.2);}
+#introCont {
+  overflow: hidden;
+  position: absolute;
+  bottom:5%;
+  right:0;
+  width:100%;
+  height:170px;
+  text-align: left;
+}
+/* step1 */
+#introCont .left {
+  position: absolute;
+  bottom:-170px;
+  right:10px;
+  z-index: 100;
+  transition: bottom 0.5s cubic-bezier(0.5, 0, 0.5, 1.5);
+}
+/* 말풍선 */
+#introCont .left:after {
+  content:'';
+  position: absolute;
+  top:-70px;
+  right:32px;
+  z-index: 200;
+  width:170px;
+  height:103px;
+  background: url('~@/assets/images/sp_intro.png') no-repeat;
+  background-position: -100px -150px;
+  background-size: 500px 500px;
+  transform-origin: 100% 100%;
+}
+/* 캐릭터 */
+#introCont .left > div {
+  display:inline-block;
+  position: relative;
+  z-index: 300;
+  width:56px;
+  height:70px;
+  font-size:0;
+  line-height: 0;
+  background: url('~@/assets/images/sp_intro.png') no-repeat;
+  background-position: 0 -150px;
+  background-size: 500px 500px;
+  transform-origin: 50% 100%;
+}
+/* 닫기 버튼 */
+#introCont .left > button {
+  border:0 none;
+  font-size:0;
+  line-height: 0;
+  position: absolute;
+  top:-80px;
+  left:-170px;
+  width:20px;
+  height:20px;
+  background: url('~@/assets/images/sp_intro.png') no-repeat;
+  background-position: -200px 0;
+  background-size: 500px 500px;
+  transform-origin: 50% 100%;
+}
+/* 등장 */
+#introCont.step1 .left {bottom:0;}
+/* 말풍선 반복 */
+#introCont.step1 .left:after {
+  animation: imgLoop01 0.5s infinite alternate;
+  animation-delay: 1s;
+}
+/* 말풍선 퇴장 */
+#introCont.step2 .left:after {
+  animation-play-state: paused;
+  animation: imgRotateLeft1 1.5s ease forwards 1;
+  /* animation-delay:0.5s; */
+}
+@keyframes imgRotateLeft1 {
+0%    {transform: rotate(0deg);}
+50%   {transform: rotate(10deg) scale(1);}
+100%  {transform: rotate(-10deg) scale(0);}
+}
+#introCont.step2 .left > button {
+  animation: buttonHiden 1s ease forwards 1;
+}
+@keyframes buttonHiden {
+  0%    {top: -80px;left: -170px;}
+  50%   {top: -50px;left: -130px;}
+  80%,100%  {top: 30px;left: 20px;opacity:0;}
+}
+#introCont.step2 .left {
+  bottom: -170px;
+  transition-delay: 1.5s;
+}
+
+
+
+
+
+/* step2 */
+#introCont .right {
+  position: absolute;
+  bottom:-48px;
+  right:10px;
+  z-index: 100;
+  transition: bottom 0.3s cubic-bezier(0.5, 0, 0.5, 1.5);
+}
+/* 말풍선 */
+#introCont .right:after {
+  content:'';
+  position: absolute;
+  top:4px;
+  right:4px;
+  z-index: -1;
+  width:34px;
+  height:33px;
+  transition: top, right 0.3s, 0.2s linear;
+  background: url('~@/assets/images/sp_intro.png') no-repeat;
+  background-position: -100px 0;
+  background-size: 500px 500px;
+}
+/* 캐릭터 */
+#introCont .right > a {
+  display:inline-block;
+  position: relative;
+  width:44px;
+  height:48px;
+  font-size:0;
+  line-height: 0;
+  background: url('~@/assets/images/sp_intro.png') no-repeat;
+  background-position: 0 0;
+  background-size: 500px 500px;
+  transform-origin: 50% 100%;
+}
+#introCont.step2 .right {
+  bottom:0;
+  transition-delay: 2s;
+}
+#introCont.step2 .right > a {
+  animation: imgRotate01 2s infinite;
+  animation-delay: 5s;
+}
+@keyframes imgRotate01 {
+0%    {transform: rotate(0deg);}
+25%   {transform: rotate(-3deg);}
+50%   {transform: rotate(0deg);}
+75%   {transform: rotate(-3deg);}
+100%  {transform: rotate(0deg);}
+}
+#introCont.step2 .right:after {
+  top:-34px;
+  right:-5px;
+  transition-delay: 2.5s;
+  animation: imgLoop01 0.5s infinite alternate;
+  animation-delay: 3.5s;
+}
+@keyframes imgLoop01 {
+  0%    {transform: translateY(0px);}
+  100%  {transform: translateY(-8px);}
+}
+</style>
