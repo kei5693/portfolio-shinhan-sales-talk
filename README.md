@@ -1,24 +1,5 @@
 # finder
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 개요 : 신한생명 세일즈톡
+- 대응기기 : 모바일
+- [링크](https://kei5693.github.io/work/portfolio/shinhan-sales-talk/#/)
